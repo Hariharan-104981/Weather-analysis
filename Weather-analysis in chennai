@@ -1,0 +1,106 @@
+import pandas as pd
+import numpy as np
+
+
+print(" ====================Welcome to Weather Analysis of Chennai===========================")
+df = pd.read_csv('chennai weather in 2026.csv', encoding='latin1')
+print('\nLoaded Data From Excel View:\n', df)
+
+while True:
+    print("==" + "="*40)
+    print("1 - Weather overall data")
+    print("2 - Average data of a month")
+    print("3 - Prediction of future weather in 2026")
+    print("4 - Exit")
+    print("="*40)
+    
+  
+    try:
+        a = int(input("Enter your choice pa (1-4): "))
+    except ValueError:
+        print("\n Invalid selection! Please enter a number from 1 to 4.")
+        continue
+    
+    if a == 1:
+        w = input("Which month u want until june month? (1-6): ").strip().lower()
+        
+        if w == 'jan' or w == 'january': w = '1'
+        elif w == 'feb' or w == 'february': w = '2'
+        elif w == 'mar' or w == 'march': w = '3'
+        elif w == 'apr' or w == 'april': w = '4'
+        elif w == 'may': w = '5'
+        elif w == 'jun' or w == 'june': w = '6'
+        
+        if w.isdigit():
+            w = int(w)
+        else:
+            w = -1
+            
+        if 1 <= w <= 6:
+            idx = w - 1
+            print(f"\nOverall Data at Sheet Index {idx}:")
+            print(f"Month: {df.iloc[idx, 0]} | Temp: {df.iloc[idx, 1]}")
+        else:
+            print("Invalid month ya. Please enter in 1-6.")
+            
+    elif a == 2:
+        p = input("Which average data month? (1-12): ").strip().lower()
+        
+        if p == 'jan' or p == 'january': p = '1'
+        elif p == 'feb' or p == 'february': p = '2'
+        elif p == 'mar' or p == 'march': p = '3'
+        elif p == 'apr' or p == 'april': p = '4'
+        elif p == 'may': p = '5'
+        elif p == 'jun' or p == 'june': p = '6'
+        elif p == 'jul' or p == 'july': p = '7'
+        elif p == 'aug' or p == 'august': p = '8'
+        elif p == 'sep' or p == 'september': p = '9'
+        elif p == 'oct' or p == 'october': p = '10'
+        elif p == 'nov' or p == 'november': p = '11'
+        elif p == 'dec' or p == 'december': p = '12'
+        
+        if p.isdigit():
+            p = int(p)
+        else:
+            p = -1
+            
+        if 1 <= p <= 12:
+            u = p - 1
+            if u < len(df):
+                climate_desc = df.iloc[u, 1]
+                print(f"\nMonth {p} (Row Index {u}) Climate: {climate_desc}")
+            else:
+                print(f"\nData for Month {p} is not present in the file yet!")
+        else:
+            print("Invalid month. Please enter 1-12.")
+            
+    elif a == 3:    
+        H = input("Which month bro be predicted? (7-12): ").strip().lower()
+        
+      
+        if H == 'jul' or H == 'july': H = '7'
+        elif H == 'aug' or H == 'august': H = '8'
+        elif H == 'sep' or H == 'september': H = '9'
+        elif H == 'oct' or H == 'october': H = '10'
+        elif H == 'nov' or H == 'november': H = '11'
+        elif H == 'dec' or H == 'december': H = '12'
+            
+        if H.isdigit():
+            o = int(H)
+        else:
+            o = -1
+                
+        if 7 <= o <= 12:
+            prediction = 35 - (o - 6)
+            print(f"\n [EASY FORMULA PREDICTION FOR MONTH {o}]:")
+            print(f" MATH BHAIYA FORMULA: 35 - ({o} - 6)")
+            print(f" Predicted Temp: {prediction}°C")
+        else:
+            print("Invalid month. Please enter 7-12.")
+            
+    elif a == 4:
+        print("bye bye goodbye!!")
+        break
+        
+    else:
+        print("\nInvalid SELECTION BRO! Select nO'S from 1 to 4.") 
